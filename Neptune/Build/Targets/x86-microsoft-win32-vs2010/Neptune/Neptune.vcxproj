@@ -133,7 +133,7 @@
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DebugInformationFormat>None</DebugInformationFormat>
       <ProgramDataBaseFileName>$(OutDir)Neptune.pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Lib>
