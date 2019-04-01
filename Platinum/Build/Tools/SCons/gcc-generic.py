@@ -19,7 +19,8 @@ def generate(env, gcc_cross_prefix=None, gcc_strict=True, gcc_stop_on_warning=No
     else:
         env.AppendUnique(CCFLAGS = '-O3')
 
-    env.AppendUnique(CCFLAGS = '-std=c++98')
+    if env['target'] != 'universal-apple-macosx':
+        env.AppendUnique(CCFLAGS = '-std=c++98')
 
     if gcc_stop_on_warning:
         env.AppendUnique(CCFLAGS = ['-Werror'])
