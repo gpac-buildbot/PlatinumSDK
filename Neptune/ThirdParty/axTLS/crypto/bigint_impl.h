@@ -1,18 +1,18 @@
 /*
  * Copyright (c) 2007, Cameron Rich
- * 
+ *
  * All rights reserved.
- * 
- * Redistribution and use in source and binary forms, with or without 
+ *
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- * * Redistributions of source code must retain the above copyright notice, 
+ * * Redistributions of source code must retain the above copyright notice,
  *   this list of conditions and the following disclaimer.
- * * Redistributions in binary form must reproduce the above copyright notice, 
- *   this list of conditions and the following disclaimer in the documentation 
+ * * Redistributions in binary form must reproduce the above copyright notice,
+ *   this list of conditions and the following disclaimer in the documentation
  *   and/or other materials provided with the distribution.
- * * Neither the name of the axTLS project nor the names of its contributors 
- *   may be used to endorse or promote products derived from this software 
+ * * Neither the name of the axTLS project nor the names of its contributors
+ *   may be used to endorse or promote products derived from this software
  *   without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
@@ -38,7 +38,7 @@
 #define BIGINT_Q_OFFSET     2    /**< q module offset. */
 #define BIGINT_NUM_MODS     3    /**< The number of modulus constants used. */
 #else
-#define BIGINT_NUM_MODS     1    
+#define BIGINT_NUM_MODS     1
 #endif
 
 /* Architecture specific functions for big ints */
@@ -61,8 +61,8 @@ typedef uint16_t comp;	        /**< A single precision component. */
 typedef uint32_t long_comp;     /**< A double precision component. */
 typedef int32_t slong_comp;     /**< A signed double precision component. */
 #else /* regular 32 bit */
-#ifdef WIN32
-#define COMP_RADIX          4294967296i64         
+#if defined(WIN32) && defined(_MSC_VER)
+#define COMP_RADIX          4294967296i64
 #define COMP_MAX            0xFFFFFFFFFFFFFFFFui64
 #else
 #define COMP_RADIX          4294967296ULL         /**< Max component + 1 */
@@ -92,7 +92,7 @@ struct _bigint
 typedef struct _bigint bigint;  /**< An alias for _bigint */
 
 /**
- * Maintains the state of the cache, and a number of variables used in 
+ * Maintains the state of the cache, and a number of variables used in
  * reduction.
  */
 typedef struct /**< A big integer "session" context. */

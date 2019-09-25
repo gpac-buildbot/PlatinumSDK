@@ -162,7 +162,7 @@
 #define NPT_LocalFunctionName __FUNCTION__
 #define NPT_COMPILER_UNUSED(p) (void)p
 #else
-#define NPT_COMPILER_UNUSED(p) 
+#define NPT_COMPILER_UNUSED(p)
 #endif
 
 /* TriMedia C/C++ Compiler */
@@ -179,6 +179,12 @@
 #undef NPT_CONFIG_HAVE_SNPRINTF
 #undef NPT_CONFIG_HAVE_VSNPRINTF
 #endif
+#endif
+
+#if defined(__MINGW32__)
+#undef NPT_CONFIG_HAVE_GETENV
+#undef NPT_CONFIG_HAVE_SETENV
+#undef NPT_CONFIG_HAVE_UNSETENV
 #endif
 
 /* Microsoft C/C++ Compiler */
@@ -348,4 +354,4 @@ typedef long NPT_PointerLong;
 #include <dmalloc.h>
 #endif
 
-#endif // _NPT_CONFIG_H_ 
+#endif // _NPT_CONFIG_H_

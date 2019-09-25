@@ -8,7 +8,7 @@ def generate(env, gcc_cross_prefix=None, gcc_strict=True, gcc_stop_on_warning=No
         env.AppendUnique(CCFLAGS = ['-pedantic', '-Wall',  '-W',  '-Wundef', '-Wno-long-long', '-fPIC'])
         env.AppendUnique(CFLAGS  = ['-Wmissing-prototypes', '-Wmissing-declarations'])
     else:
-        env.AppendUnique(CCFLAGS = ['-Wall', '-fPIC'])
+        env.AppendUnique(CCFLAGS = ['-Wall', '-fPIC', '-fpermissive'])
 
     compiler_defines = ['-D_REENTRANT']
     env.AppendUnique(CCFLAGS  = compiler_defines)

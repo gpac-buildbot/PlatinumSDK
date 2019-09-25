@@ -44,7 +44,7 @@ static LPWSTR A2WHelper(LPWSTR lpw, LPCSTR lpa, int nChars, UINT acp)
     if (ret == 0) {
         assert(0);
         return NULL;
-    }        
+    }
     return lpw;
 }
 
@@ -111,8 +111,8 @@ static NPT_Result
 MapError(DWORD err) {
     switch (err) {
       case ERROR_ALREADY_EXISTS:      return NPT_ERROR_FILE_ALREADY_EXISTS;
-      case ERROR_PATH_NOT_FOUND:    
-      case ERROR_FILE_NOT_FOUND:    
+      case ERROR_PATH_NOT_FOUND:
+      case ERROR_FILE_NOT_FOUND:
       case ERROR_INVALID_DRIVE:
       case ERROR_BAD_PATHNAME:
       case ERROR_BAD_NET_NAME:
@@ -137,7 +137,7 @@ MapError(DWORD err) {
       case ERROR_INVALID_BLOCK:       return NPT_ERROR_OUT_OF_MEMORY;
       case ERROR_DISK_FULL:           return NPT_ERROR_FILE_NOT_ENOUGH_SPACE;
       case ERROR_TOO_MANY_OPEN_FILES: return NPT_ERROR_OUT_OF_RESOURCES;
-      case ERROR_INVALID_HANDLE:      
+      case ERROR_INVALID_HANDLE:
       case ERROR_INVALID_ACCESS:
       case ERROR_INVALID_DATA:        return NPT_ERROR_INVALID_PARAMETERS;
       case ERROR_DIR_NOT_EMPTY:       return NPT_ERROR_DIRECTORY_NOT_EMPTY;
@@ -230,6 +230,16 @@ NPT_getcwd_utf8(char* dir, unsigned int max_size)
     char* converted = NPT_WIN32_W2A(result);
     NPT_CopyString(dir, converted);
     return dir;
+}
+
+/*----------------------------------------------------------------------
+|   NPT_fopen_utf8
++---------------------------------------------------------------------*/
+FILE*
+NPT_fopen_utf8(const char* path, const char* mode)
+{
+    NPT_WIN32_USE_CHAR_CONVERSION;
+    return _wfopen(NPT_WIN32_A2W(path), NPT_WIN32_A2W(mode + NPT_String(", ccs=UNICODE")));
 }
 
 /*----------------------------------------------------------------------
@@ -355,7 +365,7 @@ NPT_File_ProcessFindData(WIN32_FIND_DATAW* find_data)
     NPT_WIN32_USE_CHAR_CONVERSION;
 
     // discard system specific files/shortcuts
-    if (NPT_StringsEqual(NPT_WIN32_W2A(find_data->cFileName), ".") || 
+    if (NPT_StringsEqual(NPT_WIN32_W2A(find_data->cFileName), ".") ||
         NPT_StringsEqual(NPT_WIN32_W2A(find_data->cFileName), "..")) {
         return false;
     }
@@ -366,10 +376,10 @@ NPT_File_ProcessFindData(WIN32_FIND_DATAW* find_data)
 /*----------------------------------------------------------------------
 |   NPT_File::ListDir
 +---------------------------------------------------------------------*/
-NPT_Result 
-NPT_File::ListDir(const char*           path, 
-                  NPT_List<NPT_String>& entries, 
-                  NPT_Ordinal           start /* = 0 */, 
+NPT_Result
+NPT_File::ListDir(const char*           path,
+                  NPT_List<NPT_String>& entries,
+                  NPT_Ordinal           start /* = 0 */,
                   NPT_Cardinal          max   /* = 0 */)
 {
     NPT_WIN32_USE_CHAR_CONVERSION;

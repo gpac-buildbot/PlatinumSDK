@@ -1,0 +1,7 @@
+
+LoadTool('gcc-generic', env, gcc_strict=False, gcc_cross_prefix=env['cross_prefix'] if 'cross_prefix' in env else None)
+
+### Neptune System Files
+env['NPT_SYSTEM_SOURCES']={'System/Bsd' : 'NptBsdResolver.cpp NptBsdSockets.cpp', 'System/StdC':'NptStdcFile.cpp NptStdcEnvironment.cpp' , 'System/Posix':'NptPosixFile.cpp', 'System/Win32':'*.cpp'}
+
+env['NPT_INCLUDE_DIRS'] = ['System/Win32']
